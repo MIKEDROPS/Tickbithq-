@@ -25,3 +25,21 @@ body {
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
 }
+.hero{
+  background-image: linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../../public/assets/img/tickbit-hero.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-y: 50%;
+}
+
+.event{
+  background: url('../../public/assets/img/tickbit-event-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.special{
+  background: url('../../public/assets/img/tickbit-special.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
