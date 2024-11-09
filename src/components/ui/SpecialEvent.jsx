@@ -17,7 +17,7 @@ const SpecialEvent = () => {
                 <Button 
                     text={"Get Started"}
                     iconName={<FaArrowRight className='text-secondary text-2xl' />}
-                    btnStyle={"bg-primary mt-4 text-secondary md:text-[15px] flex-row-reverse text-[12px] font-[500] p-3 rounded-[8px] md:w-[230.5px] m-auto"}
+                    btnStyle={"bg-primary mt-4 text-secondary md:text-[15px] flex-row-reverse text-[12px] font-[500] p-3 rounded-[8px] md:w-[230.5px] w-full m-auto"}
                 />
             </div>
         </div>

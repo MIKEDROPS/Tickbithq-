@@ -3,7 +3,7 @@
 import React from 'react'
 import logo from '../../../../public/assets/svg/tickbit-logo.svg'
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import {MdClose} from 'react-icons/md'
 import Button from '@/components/elements/Button';
 import google from '../../../../public/assets/svg/tickbit-google.svg'
@@ -14,9 +14,10 @@ import Link from 'next/link';
 const Auth = () => {
   const params = useParams();
   
+  
   return (
     <div className='flex'>
-        <div className='bg-primary p-10 flex-[1]'>
+        <div className='bg-primary p-10 flex-[1] md:flex hidden'>
           <Image src={logo} className='w-[161.66px] h-[36px]' alt='' />
           <p className='md:text-[36px] text-[23px] font-[700] md:w-[387px] text-white mt-20'>
             Buy tickets with Bitcoin, explore top events, and enjoy secure transactions—all in one place!
@@ -34,14 +35,15 @@ export default Auth
 
 
 function Register(){
+  const router = useRouter()
   return (
-    <div className='p-10'>
+    <div className='md:p-10 p-6'>
         <div className='flex justify-end'>
-          <MdClose className="cursor-pointer text-2xl text-[#A3A3A3]" />
+          <MdClose onClick={()=> router.push('/')} className="cursor-pointer text-2xl text-[#A3A3A3]" />
         </div>
         <div className='md:text-[36px] text-[25px] font-[700] text-primary'>Create Account</div>
-        <div className='flex items-center gap-6 mt-10'>
-          <Button 
+        <div className='flex md:flex-row flex-col items-center md:gap-6 gap-3 mt-10'>
+          <Button
             text={"Sign up with Google"}
             imgPath={google}
             btnStyle={'border-[1px] border-[#A3A3A3] p-3 rounded-[8px] text-primary md:text-[15px] text-[12px] w-full'}
@@ -74,13 +76,14 @@ function Register(){
 
 
 function Login(){
+  const router = useRouter()
   return (
-    <div className='p-10'>
+    <div className='md:p-10 p-6'>
         <div className='flex justify-end'>
-          <MdClose className="cursor-pointer text-2xl text-[#A3A3A3]" />
+          <MdClose onClick={()=> router.push('/')} className="cursor-pointer text-2xl text-[#A3A3A3]" />
         </div>
         <div className='md:text-[36px] text-[25px] font-[700] text-primary'>Login</div>
-        <div className='flex items-center gap-6 mt-10'>
+        <div className='flex md:flex-row flex-col items-center md:gap-6 gap-3 mt-10'>
           <Button 
             text={"Sign up with Google"}
             imgPath={google}

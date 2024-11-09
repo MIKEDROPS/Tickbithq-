@@ -27,7 +27,7 @@ body {
 }
 .hero{
   background-image: linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../../public/assets/img/tickbit-hero.jpg');
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position-y: 50%;
 }

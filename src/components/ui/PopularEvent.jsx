@@ -24,7 +24,7 @@ const PopularEvent = () => {
             </div>
             <Button 
                 text={"See More"}
-                btnStyle={"bg-white rounded-[8px] border-primary border-[1px] m-auto md:w-[457.5px] p-3 md:mt-8 mt-4"}
+                btnStyle={"bg-white rounded-[8px] border-primary border-[1px] m-auto md:w-[457.5px] w-full p-3 md:mt-8 mt-4"}
             />
         </div>
     </div>

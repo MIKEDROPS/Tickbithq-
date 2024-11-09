@@ -10,18 +10,18 @@ import { useRouter } from 'next/navigation';
 const Header = () => {
     const router = useRouter()
   return (
-    <div className='flex items-center bg-primary p-3 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white justify-around'>
+    <div className='flex items-center bg-primary md:p-3 p-5 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white md:justify-around'>
         <div className=''>
             <Image src={logo} alt='' />
         </div>
-        <div className='flex items-center gap-10'>
+        <div className='md:flex hidden items-center gap-10'>
             <Link href={"#"}>Home</Link>
             <Link href={"#"}>Events</Link>
             <Link href={"#"}>About</Link>
             <Link href={"#"}>Wallet</Link>
             <Link href={"#"}>Contact</Link>
         </div>
-        <div className='flex items-center gap-10'>
+        <div className='md:flex hidden items-center gap-10'>
             <Link href={"#"}>Create Event</Link>
             <Link href={"/auth/login"}>Login</Link>
             <Button 

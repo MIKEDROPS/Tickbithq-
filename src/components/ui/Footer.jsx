@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <div className='flex items-center p-8 bg-primary justify-center'>
         <div className='md:w-[95%] w-full'>
-            <div className='flex justify-between flex-wrap'>
+            <div className='flex justify-between flex-wrap gap-5'>
                 <div className='flex flex-col gap-1'>
                     <div className='md:text-[18px] text-[14px] text-white font-[600]'>Company Info</div>
                     <div className='md:text-[14px] text-[12px] text-[#A9A9A9] font-[400]'>About Us</div>
