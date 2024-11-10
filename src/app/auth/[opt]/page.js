@@ -16,14 +16,14 @@ const Auth = () => {
   
   
   return (
-    <div className='flex'>
+    <div className='flex bg-primary'>
         <div className='bg-primary p-10 flex-[1] md:flex hidden'>
           <Image src={logo} className='w-[161.66px] h-[36px]' alt='' />
           <p className='md:text-[36px] text-[23px] font-[700] md:w-[387px] text-white mt-20'>
             Buy tickets with Bitcoin, explore top events, and enjoy secure transactions—all in one place!
           </p>
         </div>
-        <div className='flex-[1] bg-white rounded-tl-[52.5px] rounded-bl-[52.5px] relative z-10'>
+        <div className='flex-[1] bg-white rounded-tl-[52.5px] rounded-bl-[52.5px] relative z-20'>
           {params.opt == "register" && <Register />}
           {params.opt == "login" && <Login />}
         </div>
