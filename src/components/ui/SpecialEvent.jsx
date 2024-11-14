@@ -12,7 +12,7 @@ const SpecialEvent = () => {
             <div className='flex flex-col items-center'>
                 <div className=''>
                     <div className='text-primary md:text-[30px] text-[20px] font-[500]'>Events specially curated for you!</div>
-                    <div className='text-primary md:text-[21px] text-[14px] font-[400]'>Get event suggestions tailored to your interests! Don't let your favorite events slip away.</div>
+                    <div className='text-primary md:text-[21px] text-[14px] font-[400]'>{"Get event suggestions tailored to your interests! Don't let your favorite events slip away."}</div>
                 </div>
                 <Button 
                     text={"Get Started"}
