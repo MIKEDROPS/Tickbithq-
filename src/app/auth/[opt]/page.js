@@ -16,7 +16,7 @@ const Auth = () => {
   
   
   return (
-    <div className='flex bg-primary'>
+    <div className='flex bg-primary relative z-10'>
         <div className='bg-primary p-10 flex-[1] md:flex hidden'>
           <Image src={logo} className='w-[161.66px] h-[36px]' alt='' />
           <p className='md:text-[36px] text-[23px] font-[700] md:w-[387px] text-white mt-20'>
