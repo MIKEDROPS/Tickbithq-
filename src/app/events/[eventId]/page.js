@@ -135,7 +135,7 @@ const EventDetails = () => {
                 <div className='md:text-[30px] text-[20px] mb-6 font-[700] text-primary'>Other events you may like</div>
                 <div className='grid md:grid-cols-3 gap-4 grid-cols-1'>
                     {[1,2,3].map((_, index)=>(
-                        <EventCard />
+                        <EventCard key={index} />
                     ))}
                 </div>
             </div>
