@@ -12,11 +12,13 @@ const Header = () => {
   return (
     <div className='flex items-center bg-primary md:p-3 p-5 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white md:justify-around'>
         <div className=''>
-            <Image src={logo} alt='' />
+            <Link href={"/"}>
+                <Image src={logo} alt='' />
+            </Link>
         </div>
         <div className='md:flex hidden items-center gap-10'>
-            <Link href={"#"}>Home</Link>
-            <Link href={"#"}>Events</Link>
+            <Link href={"/"}>Home</Link>
+            <Link href={"/events"}>Events</Link>
             <Link href={"#"}>About</Link>
             <Link href={"#"}>Wallet</Link>
             <Link href={"#"}>Contact</Link>

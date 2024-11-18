@@ -13,7 +13,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="">
-      <Header />
       <Hero />
       <Explore />
       <PopularEvent />
@@ -22,7 +21,6 @@ export default function Home() {
       <TrendingEvent />
       <CreateEvent />
       <Newsletter />
-      <Footer />
     </main>
   );
 }
