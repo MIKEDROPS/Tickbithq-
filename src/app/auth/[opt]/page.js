@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../../../../public/assets/svg/tickbit-logo.svg'
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
@@ -10,6 +10,7 @@ import google from '../../../../public/assets/svg/tickbit-google.svg'
 import facebook from '../../../../public/assets/svg/tickbit-facebook.svg'
 import Input from '@/components/elements/Input';
 import Link from 'next/link';
+import {AppContext} from '@/context/AppContext';
 
 const Auth = () => {
   const params = useParams();
@@ -36,6 +37,14 @@ export default Auth
 
 function Register(){
   const router = useRouter()
+  const [registerData, setRegisterData] = useState({
+    phoneNumber: "",
+    password: ""
+  });
+
+  const {register, isLoading} = useContext(AppContext);
+
+
   return (
     <div className='md:p-10 p-6'>
         <div className='flex justify-end'>
@@ -61,11 +70,12 @@ function Register(){
         </div>
 
         <div className='flex flex-col gap-6 mt-8'>
-          <Input placeholder={"Enter your full name"} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Full Name"} />
-          <Input placeholder={"Enter your e-mail"} inputStyle={"rounded-[8px]"} type={"email"} labelName={"E-mail Address"} />
-          <Input placeholder={"Enter password"} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
+          <Input placeholder={"Enter your contact"} value={registerData.phoneNumber} onChange={(e)=> setRegisterData({...registerData, phoneNumber: e.target.value})} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Phone Number"} />
+          <Input placeholder={"Enter password"} value={registerData.password} onChange={(e)=> setRegisterData({...registerData, password: e.target.value})} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
           <Button 
             text={"Create Account"}
+            loading={isLoading}
+            onBtnClick={()=> register(registerData.phoneNumber, registerData.password)}
             btnStyle={"bg-primary text-white font-[600] md:text-[15px] text-[12px] p-4 rounded-[8px] w-full"}
           />
         </div>
@@ -76,7 +86,15 @@ function Register(){
 
 
 function Login(){
-  const router = useRouter()
+  const router = useRouter();
+  const [loginData, setLoginData] = useState({
+    phoneNumber: "",
+    password: ""
+  });
+
+  const {login, isLoading} = useContext(AppContext);
+
+
   return (
     <div className='md:p-10 p-6'>
         <div className='flex justify-end'>
@@ -102,10 +120,12 @@ function Login(){
         </div>
 
         <div className='flex flex-col gap-6 mt-8'>
-          <Input placeholder={"Enter your e-mail"} inputStyle={"rounded-[8px]"} type={"email"} labelName={"E-mail Address"} />
-          <Input placeholder={"Enter password"} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
+        <Input placeholder={"Enter your contact"} value={loginData.phoneNumber} onChange={(e)=> setLoginData({...loginData, phoneNumber: e.target.value})} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Phone Number"} />
+        <Input placeholder={"Enter password"} value={loginData.password} onChange={(e)=> setLoginData({...loginData, password: e.target.value})} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
           <Button 
             text={"Login"}
+            loading={isLoading}
+            onBtnClick={()=> login(loginData.phoneNumber, loginData.password)}
             btnStyle={"bg-primary text-white font-[600] md:text-[15px] text-[12px] p-4 rounded-[8px] w-full"}
           />
         </div>
