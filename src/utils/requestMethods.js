@@ -1,10 +1,16 @@
+"use client"
+
 import axios from 'axios'
 
 
+let userInfo;
+if (typeof window !== "undefined") {
+    userInfo = localStorage.getItem("key");
+}
 
 export const BASE_URL = 'https://walletbtc.onrender.com/api'
 export const BASE_URL_MAIN = 'https://tickbit.onrender.com/api'
-const userInfo = localStorage.getItem('userInfo')
+
 
 export const userRequest = axios.create({
     baseURL: BASE_URL,

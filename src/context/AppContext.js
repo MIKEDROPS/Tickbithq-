@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { authPublicRequest, authUserRequest, publicRequest, userRequest } from "@/utils/requestMethods";
 import axios from "axios";
@@ -18,7 +18,7 @@ export const AppProvider = ({children})=>{
 
     const [userInfo, setUserInfo] = useState(() => {
         // Lazy initialization
-        const storedData = localStorage.getItem("userInfo");
+        const storedData = typeof window !== "undefined" && localStorage.getItem("userInfo");
         return storedData ? JSON.parse(storedData) : {};
     });
     const router = useRouter();
@@ -29,12 +29,12 @@ export const AppProvider = ({children})=>{
     // Save userInfo to localStorage only when explicitly set
     const saveUserInfo = (data) => {
         setUserInfo(data);
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        typeof window !== "undefined" && localStorage.setItem("userInfo", JSON.stringify(data));
     };
 
     const removeUserInfo = () => {
         setUserInfo({});
-        localStorage.removeItem("userInfo");
+        typeof window !== "undefined" && localStorage.removeItem("userInfo");
     };
 
 

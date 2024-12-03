@@ -34,9 +34,6 @@ const Wallet = () => {
     useEffect(()=>{
         getWalletById();
     }, []);
-    
-    let data = localStorage.getItem('userInfo');
-    console.log("userData token: ", userInfo?.token);
 
     const handleWalletType = (val) =>{
         setWalletType(val)
