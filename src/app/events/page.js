@@ -1,11 +1,60 @@
 "use client";
 
 import { EventCardHorizontal } from '@/components/elements/EventCard';
-import React from 'react'
+import Loader from '@/components/elements/Loader';
+import { AppContext } from '@/context/AppContext';
+import { authPublicRequest, BASE_URL_MAIN } from '@/utils/requestMethods';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
 import { IoSearch } from 'react-icons/io5';
 import { SlArrowDown } from 'react-icons/sl';
 
 const Events = () => {
+    const [events, setEvents] = useState([]);
+    const [isEvent, setIsEvent] = useState(false);
+    const {userInfo, userData} = useContext(AppContext)
+
+
+    const authUserRequest = axios.create({
+        baseURL: BASE_URL_MAIN,
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+
+    authUserRequest.interceptors.request.use(
+        (config) => {
+          const token = userInfo?.token;
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
+          return config;
+        },
+        (error) => Promise.reject(error)
+    );
+
+    useEffect(()=>{
+        const fetchEvents = async ()=>{
+            setIsEvent(true)
+            try {
+                const {data} = await authUserRequest.get(`/events/events`);
+                if(data.success == true){
+                    setEvents(data.events);
+                    setIsEvent(false)
+                    console.log(data.event)
+                }
+            } catch (error) {
+                const err = error.response?.data;
+                setIsEvent(false)
+                toast(err.message);
+            }
+        }
+
+        fetchEvents();
+
+    }, []);
+
+
   return (
     <div className='mt-[4rem]'>
         <div className='grid place-items-center md:pt-[4rem] md:h-[433.5px] h-[500px] bg-gradient-to-tr to-primary from-[rgba(45,44,60,0.8)]'>
@@ -141,11 +190,25 @@ const Events = () => {
                         <option>Relevance</option>
                     </select>
                 </div>
-                <div className='grid md:grid-cols-2 grid-cols-1 md:mt-16 mt-5 md:gap-8 gap-4'>
-                    {[1,2,3,4,5,6,7,8,9,10].map((_, index)=>(
-                        <EventCardHorizontal key={index} />
-                    ))}
-                </div>
+                {isEvent ? (
+                    <div className='grid place-items-center h-[800px]'>
+                        <Loader />
+                    </div>
+                ) : (
+                    <>
+                        {events.length > 0 ? (
+                            <div className='grid md:grid-cols-2 grid-cols-1 md:mt-16 mt-5 md:gap-8 gap-4'>
+                                {events.map((_, index)=>(
+                                    <EventCardHorizontal event={_} key={index} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className=''>
+                                <div className='text-2xl text-gray-300 text-center'>Not Event found. Nothing to See here</div>
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
         </div>
     </div>

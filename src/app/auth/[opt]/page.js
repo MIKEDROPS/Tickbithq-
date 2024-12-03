@@ -38,7 +38,8 @@ export default Auth
 function Register(){
   const router = useRouter()
   const [registerData, setRegisterData] = useState({
-    phoneNumber: "",
+    fullname: "",
+    email: "",
     password: ""
   });
 
@@ -70,12 +71,13 @@ function Register(){
         </div>
 
         <div className='flex flex-col gap-6 mt-8'>
-          <Input placeholder={"Enter your contact"} value={registerData.phoneNumber} onChange={(e)=> setRegisterData({...registerData, phoneNumber: e.target.value})} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Phone Number"} />
+          <Input placeholder={"Enter your fullname"} value={registerData.fullname} onChange={(e)=> setRegisterData({...registerData, fullname: e.target.value})} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Fullname"} />
+          <Input placeholder={"Enter your email"} value={registerData.email} onChange={(e)=> setRegisterData({...registerData, email: e.target.value})} inputStyle={"rounded-[8px]"} type={"email"} labelName={"Email Address"} />
           <Input placeholder={"Enter password"} value={registerData.password} onChange={(e)=> setRegisterData({...registerData, password: e.target.value})} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
           <Button 
             text={"Create Account"}
             loading={isLoading}
-            onBtnClick={()=> register(registerData.phoneNumber, registerData.password)}
+            onBtnClick={()=> register(registerData.fullname, registerData.email, registerData.password)}
             btnStyle={"bg-primary text-white font-[600] md:text-[15px] text-[12px] p-4 rounded-[8px] w-full"}
           />
         </div>
@@ -88,7 +90,7 @@ function Register(){
 function Login(){
   const router = useRouter();
   const [loginData, setLoginData] = useState({
-    phoneNumber: "",
+    email: "",
     password: ""
   });
 
@@ -120,12 +122,12 @@ function Login(){
         </div>
 
         <div className='flex flex-col gap-6 mt-8'>
-        <Input placeholder={"Enter your contact"} value={loginData.phoneNumber} onChange={(e)=> setLoginData({...loginData, phoneNumber: e.target.value})} inputStyle={"rounded-[8px]"} type={"text"} labelName={"Phone Number"} />
+        <Input placeholder={"Enter your email"} value={loginData.email} onChange={(e)=> setLoginData({...loginData, email: e.target.value})} inputStyle={"rounded-[8px]"} type={"email"} labelName={"Email Address"} />
         <Input placeholder={"Enter password"} value={loginData.password} onChange={(e)=> setLoginData({...loginData, password: e.target.value})} inputStyle={"rounded-[8px]"} type={"password"} labelName={"Password"} />
           <Button 
             text={"Login"}
             loading={isLoading}
-            onBtnClick={()=> login(loginData.phoneNumber, loginData.password)}
+            onBtnClick={()=> login(loginData.email, loginData.password)}
             btnStyle={"bg-primary text-white font-[600] md:text-[15px] text-[12px] p-4 rounded-[8px] w-full"}
           />
         </div>

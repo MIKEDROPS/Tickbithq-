@@ -67,7 +67,7 @@ const Button = ({
 export default Button;
 
 
-function Loader(){
+export function Loader(){
   return (
     <div className="loader animate-spin p-[8px] border-t-[2px] border-[2px] border-transparent rounded-[100%] border-t-white"></div>
   )

@@ -15,7 +15,7 @@ import { BiSolidDownArrow } from "react-icons/bi";
 const Header = () => {
     const router = useRouter();
     const [isProfile, setIsProfile] = useState(false);
-    const {userInfo, logout} = useContext(AppContext);
+    const {userInfo, logout, ticketQuantity} = useContext(AppContext);
 
   return (
     <div className='flex items-center bg-primary md:p-3 p-5 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white md:justify-around'>
@@ -28,15 +28,16 @@ const Header = () => {
             <Link href={"/"}>Home</Link>
             <Link href={"/events"}>Events</Link>
             <Link href={"#"}>About</Link>
-            <Link href={"#"}>Wallet</Link>
+            <Link href={"/wallet"}>Wallet</Link>
             <Link href={"#"}>Contact</Link>
         </div>
         
         <div className='md:flex hidden items-center gap-10'>
-            <Link href={"#"}>Create Event</Link>
-            {userInfo?.token ? (
+            <Link href={"/create-event"}>Create Event</Link>
+            {userInfo.token ? (
                 <>
-                    <Link href={"#"} className='flex flex-col font-[600] items-center text-white'>
+                    <Link href={"#"} className='flex flex-col font-[600] relative items-center text-white'>
+                        {ticketQuantity > 0 && <div className='bg-secondary text-primary absolute font-bold text-[10px] rounded-full grid place-items-center w-[20px] h-[20px]'>{ticketQuantity}</div>}
                         <IoTicketOutline className='text-2xl' />
                         <span className='md:text-[10.5px]'>Tickets</span>
                     </Link>
@@ -51,7 +52,8 @@ const Header = () => {
                         </div>
                         <BiSolidDownArrow className='text-[10px]' onClick={()=> setIsProfile(!isProfile)} />
 
-                        {isProfile && <div className='bg-white w-[100px] top-[2.5rem] absolute rounded-[5px]'>
+                        {isProfile && <div className='bg-white w-[100px] flex flex-col shadow-md top-[2.5rem] right-[1rem] absolute rounded-[5px]'>
+                            <Link href={'/profile'} className='cursor-pointer text-primary font-[600] text-[10.9px] py-3 px-3'>Account</Link>
                             <span className='cursor-pointer text-primary font-[600] text-[10.9px] py-3 px-3' onClick={()=>{
                                 logout();
                                 setIsProfile(false);
