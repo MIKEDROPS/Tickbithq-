@@ -43,7 +43,7 @@ const Wallet = () => {
 
     useEffect(()=>{
         getUserData();
-    }, [isNewWallet])
+    }, [])
 
 
     useEffect(()=>{

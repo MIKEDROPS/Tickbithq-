@@ -50,7 +50,7 @@ const EventDetails = ({params}) => {
 
     useEffect(()=>{
         getWalletById();
-    }, []);
+    }, [isWalletLoading]);
 
     const [ticketData, setTicketData] = useState({
         eventId: eventId,
@@ -261,7 +261,11 @@ const EventDetails = ({params}) => {
                                                     loading={isLoading}
                                                     onBtnClick={()=> {
                                                         console.log(ticketData)
-                                                        handleTicketWalletPayment(ticketData.eventId, ticketData.fullName, ticketData.email, ticketQuantity, ticketData.phoneNumber, "paid", "BTC", "blockchain", wallet?.address,  parseFloat(event?.ticket_price * ticketQuantity).toFixed(10))
+                                                        if(userData?.wallets?.length > 0){
+                                                            handleTicketWalletPayment(ticketData.eventId, ticketData.fullName, ticketData.email, ticketQuantity, ticketData.phoneNumber, "paid", "BTC", "blockchain", wallet?.address,  parseFloat(event?.ticket_price * ticketQuantity).toFixed(10))
+                                                        }else{
+                                                            toast("You Don't have an Active Wallet, please create one")
+                                                        }
                                                     }}
                                                 />
                                             )}
