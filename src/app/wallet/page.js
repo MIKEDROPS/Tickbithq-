@@ -65,7 +65,7 @@ const Wallet = () => {
     <div className='grid place-items-center p-3 py-[6rem]'>
         {/* {isLoading && <Loader />} */}
         {userData?.wallets?.length > 0 ? (
-            <div className='md:w-[884px] w-full rounded-[32px] py-10 px-14 md:space-y-8 border-[2px] border-primary bg-gradient-to-tr to-primary from-[rgba(45,44,60,0.8)] grid place-items-center'>
+            <div className='md:w-[884px] w-full rounded-[32px] py-10 md:px-14 md:space-y-8 border-[2px] border-primary bg-gradient-to-tr to-primary from-[rgba(45,44,60,0.8)] grid place-items-center'>
                 <div className=''>
                     {/* {userData?.wallets[0]} */}
                     {/* <select className='p-3 rounded-[12px] border-[1px] bg-primary'>
@@ -76,14 +76,16 @@ const Wallet = () => {
                     </select> */}
                 </div>
 
-                <div className='flex items-center justify-center'>
-                    <div className='text-gray-300 text-2xl cursor-pointer'>{wallet?.address && wallet?.address.slice(0,10)+"..."+wallet.address.slice(wallet?.address.length - 10, wallet?.address.length)}</div>
+                <div className='flex items-center justify-center w-full'>
+                    <div className='text-gray-300 md:text-2xl text-[14px] cursor-pointer break-words'>{wallet?.address && wallet?.address.slice(0,10)+"..."+wallet.address.slice(wallet?.address.length - 10, wallet?.address.length)}</div>
                     <IoCopyOutline onClick={()=> copyText(wallet?.address)} className='text-3xl text-white cursor-pointer' />
                 </div>
 
-                <div className='md:w-[343px] md:space-y-6 space-y-3'>    
+                <div className='md:w-[343px] w-full md:space-y-6 space-y-3 md:p-0 p-4'>    
                     {isWalletLoading ? (
-                        <Loader />
+                        <div className='grid place-items-center'>
+                            <Loader />
+                        </div>
                     ) : <div className='w-full rounded-[16px] bg-[#212246] shadow-md p-6 md:space-y-5 '>
                         <div className='text-white'>
                             <div className='md:text-[12px] text-[10px] font-[400]'>My Assets</div>
@@ -99,7 +101,7 @@ const Wallet = () => {
                             </div>
                         </div>
                     </div>}
-                    <div className='flex items-center justify-between'>
+                    <div className='flex items-center justify-between md:gap-0 gap-3'>
                         <div className='flex flex-col gap-1 items-center cursor-pointer'>
                             <div className='bg-secondary w-[60.79px] h-[48.13px] rounded-[16px] grid place-items-center'>
                                 <LuUpload className='text-3xl' />
@@ -142,7 +144,7 @@ const Wallet = () => {
                 </div>
             </div>
         ) : (
-            <div className='md:w-[884px] w-full rounded-[32px] py-10 px-14 md:space-y-8 border-[2px] border-primary bg-gradient-to-tr to-primary from-[rgba(45,44,60,0.8)]'>
+            <div className='md:w-[884px] w-full rounded-[32px] py-10 md:px-14 px-6 md:space-y-8 space-y-3 border-[2px] border-primary bg-gradient-to-tr to-primary from-[rgba(45,44,60,0.8)]'>
 
                 <div className='text-white text-center'>
                     <div className='md:font-[700] font-[600] md:text-[30px] text-[22px]'>Welcome to Tickbit Wallet</div>
@@ -150,14 +152,14 @@ const Wallet = () => {
                 </div>
 
                 <div className='md:space-y-8 space-y-4'>
-                    <div onClick={()=> handleWalletType("0")} className={`md:flex items-center rounded-[32px] cursor-pointer py-14 px-8 border-[2px] ${walletType == '0' ? 'border-white' : 'border-transparent'} hover:border-white bg-[#212246] text-white`}>
+                    <div onClick={()=> handleWalletType("0")} className={`md:flex items-center rounded-[32px] cursor-pointer md:py-14 py-7 px-8 border-[2px] ${walletType == '0' ? 'border-white' : 'border-transparent'} hover:border-white bg-[#212246] text-white`}>
                         <div className='flex-[1]'></div>
                         <div className='flex-[4]'>
                             <div className='md:font-[700] font-[600] md:text-[20px] text-[16px]'>Create a new wallet</div>
                             <div className='md:text-[12px] text-[10px] font-[500]'>Get started with Crypto by creating a new wallet address to hold, trade and exchange assets.</div>
                         </div>
                     </div>
-                    <div onClick={()=> handleWalletType("1")} className={`md:flex items-center rounded-[32px] cursor-pointer px-8 py-14 border-[2px] ${walletType == '1' ? 'border-primary' : 'border-transparent'}  hover:border-primary bg-[#fff] text-primary`}>
+                    <div onClick={()=> handleWalletType("1")} className={`md:flex items-center rounded-[32px] cursor-pointer px-8 md:py-14 py-7 border-[2px] ${walletType == '1' ? 'border-primary' : 'border-transparent'}  hover:border-primary bg-[#fff] text-primary`}>
                         <div className='flex-[1]'></div>
                         <div className='flex-[4]'>
                             <div className='md:font-[700] font-[600] md:text-[20px] text-[16px]'>I already have an account</div>

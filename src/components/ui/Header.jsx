@@ -11,6 +11,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import { IoIosStarOutline } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { MdWallet } from 'react-icons/md';
 
 const Header = () => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const Header = () => {
     const {userInfo, logout, ticketQuantity} = useContext(AppContext);
 
   return (
-    <div className='flex items-center bg-primary md:p-3 p-5 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white md:justify-around'>
+    <div className='flex items-center bg-primary md:p-3 p-5 fixed z-10 top-0 w-full md:text-[15px] text-[12px] text-white md:justify-around justify-between'>
         <div className=''>
             <Link href={"/"}>
                 <Image src={logo} alt='' />
@@ -30,6 +31,21 @@ const Header = () => {
             <Link href={"#"}>About</Link>
             <Link href={"/wallet"}>Wallet</Link>
             <Link href={"#"}>Contact</Link>
+        </div>
+
+        <div className='md:hidden flex gap-3 items-center'>
+            {userInfo?.token ? (
+                <MdWallet className='text-3xl cursor-pointer' onClick={()=> router.push("/wallet")} />
+            ) : (
+                <>
+                    <Link href={"/auth/login"}>Login</Link>
+                    <Button 
+                        text={"Sign Up"}
+                        onBtnClick={()=> router.push('/auth/register') }
+                        btnStyle={"bg-secondary md:w-[91px] w-full text-primary p-3 rounded-[7.5px]"}
+                    />
+                </>
+            )}
         </div>
         
         <div className='md:flex hidden items-center gap-10'>
