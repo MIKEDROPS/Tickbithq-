@@ -4,8 +4,10 @@
 import React from 'react'
 import Button from '../elements/Button';
 import { FaRegCalendarPlus } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 const CreateEvent = () => {
+    const router = useRouter()
   return (
     <div className='bg-primary event p-10 mb-10 md:h-[236.25px] grid place-items-center'>
         <div className='flex md:flex-row flex-col items-center justify-between md:w-[80%]'>
@@ -16,6 +18,7 @@ const CreateEvent = () => {
             <div className=''>
                 <Button 
                     text={"Create Event"}
+                    onBtnClick={()=> router.push('/create-event')}
                     iconName={<FaRegCalendarPlus className='text-2xl text-primary' />}
                     btnStyle={"bg-secondary text-primary rounded-[12px] font-[500] md:text-[18px] text-[12px] p-3 md:w-[245.5px]"}
                 />

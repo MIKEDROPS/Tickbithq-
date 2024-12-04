@@ -15,6 +15,8 @@ export const AppProvider = ({children})=>{
     const [ticketQuantity, setTicketQuantity] = useState(0);
     const [wallet, setWallet] = useState({})
     const [isPaymentLoading, setIsPaymentLoading] = useState(false)
+    const [isWalletLoading, setIsWalletLoading] = useState(false)
+    const [isNewWallet, setIsNewWallet] = useState(false)
 
     const [userInfo, setUserInfo] = useState(() => {
         // Lazy initialization
@@ -162,7 +164,7 @@ export const AppProvider = ({children})=>{
             toast("No token found, please login again");
             return;
         }
-        setIsLoading(true)
+        setIsNewWallet(true)
         let newToken = parseJwt(userInfo.token)
         try {
             console.log("This is createWallet Token: ", userInfo.token);
@@ -172,30 +174,53 @@ export const AppProvider = ({children})=>{
 
             if(data?.success == true){
                 console.log(data)
-                setIsLoading(false);
+                setIsNewWallet(false);
                 toast(data?.message)
             }
         } catch (error) {
             const err = error.response?.data;
-            setIsLoading(false);
+            setIsNewWallet(false);
             toast(err?.message)
         }
     }
 
-    const connectWallet = async ()=>{
-        return;
+    const connectWallet = async (address, privateKey, mnemonic)=>{
+        if (!address || !privateKey || !mnemonic) {
+            toast("fields cannot be empty");
+            return;
+        }
+        setIsNewWallet(true)
+        let newToken = parseJwt(userInfo.token)
+        try {
+            console.log("This is createWallet Token: ", userInfo.token);
+            const {data} = await userRequest.post(`/wallet/${userData?._id}/connect-wallet-address`, 
+                {address, privateKey, mnemonic}
+            )
+
+            if(data?.success == true){
+                console.log(data)
+                setIsNewWallet(false);
+                toast(data?.message)
+            }
+        } catch (error) {
+            const err = error.response?.data;
+            setIsNewWallet(false);
+            toast(err?.message)
+        }
     }
 
     const getWalletById = async ()=>{
+        setIsWalletLoading(true)
         try {
             const {data} = await userRequest.get(`/wallet/${userData?.wallets[0]}`)
             if(data.success == true){
                 setWallet(data.wallet);
+                setIsWalletLoading(false)
                 console.log(data);
             }
         } catch (error) {
             const err = error.response?.data;
-            // setIsLoading(false);
+            setIsWalletLoading(false);
             toast(err?.message)
         }
     }
@@ -207,15 +232,20 @@ export const AppProvider = ({children})=>{
         email,
         quantity,
         phoneNumber,
-        paymentStatus)=>{
+        paymentStatus,
+        type,
+        blockchain,
+        toAddress,
+        amount
+    )=>{
 
-        if(!eventId || !fullName || !email || !quantity || !phoneNumber || !paymentStatus){
+        if(!eventId || !fullName || !email || !quantity || !phoneNumber || !paymentStatus || !type || !blockchain || !toAddress || !amount){
             toast("Fields cannot be empty");
             return;
         }
         setIsPaymentLoading(true);
         try {
-            const {data} = await userRequest.get(`/wallet/${userData?.wallets[0]}/transactions`);
+            const {data} = await userRequest.post(`/wallet/${userData?.wallets[0]}/transactions-btc`, {type, blockchain, toAddress, amount});
             if(data.success == true){
                 console.log(data.transacted);
                 setIsPaymentLoading(false)
@@ -308,8 +338,10 @@ export const AppProvider = ({children})=>{
             /* Wallet */
             wallet,
             getWalletById,
+            isWalletLoading,
             handleTicketWalletPayment,
-            isPaymentLoading
+            isPaymentLoading,
+            isNewWallet,
         }}>
             {children}
         </AppContext.Provider>

@@ -20,7 +20,7 @@ const EventCard = ({event}) => {
                 <p className='text-primary md:text-[18px] text-[14px] font-[600]'>{event?.event_title.slice(0,60)}</p>
                 <div className='text-[#5A5A5A] text-[13.5px] font-[600]'>Online</div>
                 <div className='text-[#5A5A5A] text-[13.5px] font-[400]'>{event?.start_time} PM - {event?.end_time} PM</div>
-                <div className='text-[#5A5A5A] text-[13.5px] font-[400] inline-flex items-center gap-2'><IoTicket className='text-[5A5A5A]' /> {event?.running_event == "paid" ? parseFloat(event?.ticket_price).toFixed(10) : "Free"} &#9679; <IoStar className='text-[#4539B4]' />21 Interested</div>
+                <div className='text-[#5A5A5A] text-[13.5px] font-[400] inline-flex items-center gap-2'><IoTicket className='text-[5A5A5A]' /> {event?.running_event == "paid" ? !isNaN(event?.ticket_price) && parseFloat(event?.ticket_price).toFixed(10) : "Free"} &#9679; <IoStar className='text-[#4539B4]' />21 Interested</div>
             </div>
         </div>
     </Link>
@@ -32,7 +32,7 @@ export default EventCard
 
 export function EventCardHorizontal({event}){
     return (
-        <Link href={'/events/323'} className='rounded-[8px] flex items-center gap-3 overflow-hidden cursor-pointer'>
+        <Link href={`/events/${event?._id}`} className='rounded-[8px] flex items-center gap-3 overflow-hidden cursor-pointer'>
             <div className='h-[190.5px] flex-[3] relative w-full bg-cover bg-center rounded-[8px]' style={{backgroundImage: `url(https://tickbit.onrender.com${event?.image})`}}>
                 <IoStarOutline className='bg-white rounded-[100%] p-3 text-[3rem] cursor-pointer absolute right-2 top-2' />
                 <span className='md:text-[14px] text-[12px] text-primary font-[500] bg-secondary p-2 rounded-tr-[8px] absolute bottom-0 left-0'>{event?.event_category}</span>
@@ -46,7 +46,7 @@ export function EventCardHorizontal({event}){
                     </div>
                     <div className='flex-[6]'>
                         <div className='text-[#5A5A5A] text-[15px] font-[400]'>{event?.start_time} - {event?.end_time}</div>
-                        <div className='text-[#5A5A5A] text-[15px] font-[600] inline-flex items-center gap-2'><IoTicket className='text-[5A5A5A]' /> {event?.running_event == "paid" ? parseFloat(event?.ticket_price).toFixed(10) : "Free"}</div>
+                        <div className='text-[#5A5A5A] text-[15px] font-[600] inline-flex items-center gap-2'><IoTicket className='text-[5A5A5A]' /> {event?.running_event == "paid" ? !isNaN(event?.ticket_price) && parseFloat(event?.ticket_price).toFixed(10) : "Free"}</div>
                     </div>
                 </div>
             </div>

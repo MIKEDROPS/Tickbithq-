@@ -37,7 +37,7 @@ const Header = () => {
             {userInfo.token ? (
                 <>
                     <Link href={"#"} className='flex flex-col font-[600] relative items-center text-white'>
-                        {ticketQuantity > 0 && <div className='bg-secondary text-primary absolute font-bold text-[10px] rounded-full grid place-items-center w-[20px] h-[20px]'>{ticketQuantity}</div>}
+                        {/* {ticketQuantity > 0 && <div className='bg-secondary text-primary absolute font-bold text-[10px] rounded-full grid place-items-center w-[20px] h-[20px]'>{ticketQuantity}</div>} */}
                         <IoTicketOutline className='text-2xl' />
                         <span className='md:text-[10.5px]'>Tickets</span>
                     </Link>

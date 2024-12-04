@@ -35,14 +35,14 @@ const CreateEvent = () => {
     })
 
   return (
-    <div className='flex gap-6 md:mt-[6rem] mt-[3rem] p-8'>
-        <div className='flex-[2]'>
+    <div className='flex gap-6 md:flex-row flex-col md:mt-[6rem] mt-[3rem] p-8'>
+        <div className='md:flex-[2]'>
             <div className='md:flex hidden'>
                 <FaArrowLeft onClick={()=> router.back()} className='text-3xl cursor-pointer' />
             </div>
         </div>
         {step == 0 ? 
-            <EventOne 
+            <EventOne
                 step={step} 
                 setStep={setStep}
                 eventData={eventData}
@@ -116,18 +116,18 @@ function EventOne({setStep, step, event_title,
                 Pagination
             </div>
             <div className='w-full space-y-6'>
-                <div className='flex items-center gap-2'>
+                <div className='flex md:flex-row flex-col md:items-center gap-2'>
                     <div className='flex-[1.1]'></div>
                     <div className='md:text-[30px] flex-[8] text-[20px]'>Event Details</div>
                 </div>
-                <div className='flex items-center text-[18px] gap-2'>
-                    <label className='font-[600] flex-[1.1] text-right'>Event Title <span className='text-red-500'>*</span></label>
+                <div className='flex md:flex-row flex-col md:items-center text-[18px] gap-2'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Event Title <span className='text-red-500'>*</span></label>
                     <div className='flex-[8]'>
                         <input value={event_title} onChange={(e)=> setEventData({...eventData, event_title: e.target.value})} placeholder={"Enter the name of your event"} className={'rounded-[6px] text-[#ACACAC] p-2 border-[1px] border-primary md:w-[675px]'} type={'text'} />
                     </div>
                 </div>
-                <div className='flex items-center text-[18px] gap-2'>
-                    <label className='font-[600] flex-[1.1] text-right'>Event Category <span className='text-red-500'>*</span></label>
+                <div className='flex md:flex-row flex-col md:items-center text-[18px] gap-2'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Event Category <span className='text-red-500'>*</span></label>
                     <div className='flex-[8]'>
                         <select value={event_category} onChange={(e)=> setEventData({...eventData, event_category: e.target.value})} className={'rounded-[6px] p-2 text-[#ACACAC] border-[1px] border-primary bg-transparent md:w-[675px]'}>
                             <option>Please select one</option>
@@ -141,13 +141,13 @@ function EventOne({setStep, step, event_title,
                     </div>
                 </div>
             </div>
-            <div className='w-full space-y-6'>
-                <div className='flex items-center gap-2'>
+            <div className='w-full space-y-6 md:mt-0 mt-5'>
+                <div className='flex md:flex-row flex-col md:items-center gap-2'>
                     <div className='flex-[1.1]'></div>
                     <div className='md:text-[30px] flex-[8] text-[20px]'>Date & Time</div>
                 </div>
-                <div className='flex items-center text-[18px] gap-2'>
-                    <label className='font-[600] flex-[1.1] text-right'>Event Type <span className='text-red-500'>*</span></label>
+                <div className='flex md:flex-row flex-col md:items-center text-[18px] gap-2'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Event Type <span className='text-red-500'>*</span></label>
                     <div className='flex-[8] flex items-center gap-8'>
                         <div className='inline-flex items-center gap-2 text-primary text-[16px] font-[500]'>
                             <input type="radio" value="single event" name="single event" checked={event_type == "single event"} onChange={(e)=> setEventData({...eventData, event_type: e.target.value})} />
@@ -159,9 +159,9 @@ function EventOne({setStep, step, event_title,
                         </div>
                     </div>
                 </div>
-                <div className='flex text-[18px] gap-2 w-full'>
-                    <label className='font-[600] flex-[1.1] text-right'>Event Date <span className='text-red-500'>*</span></label>
-                    <div className='flex-[8] flex items-center gap-8'>
+                <div className='flex md:flex-row flex-col text-[18px] gap-2 w-full'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Event Date <span className='text-red-500'>*</span></label>
+                    <div className='flex-[8] flex md:flex-row flex-col md:items-center gap-8'>
                         <div className='flex flex-col w-full'>
                             <div className='text-primary font-[500] text-[16px]'>Start Date</div>
                             <input value={start_date} onChange={(e)=> setEventData({...eventData, start_date: e.target.value})}  type="date" className={'rounded-[6px] text-[#ACACAC] p-2 border-[1px] border-primary md:w-full'} placeholder='DD/MM/YY' />
@@ -178,13 +178,13 @@ function EventOne({setStep, step, event_title,
                 </div>
             </div>
 
-            <div className='w-full space-y-6'>
-                <div className='flex items-center gap-2'>
+            <div className='w-full space-y-6 md:mt-0 mt-5'>
+                <div className='flex md:flex-row flex-col md:items-center gap-2'>
                     <div className='flex-[1.1]'></div>
                     <div className='md:text-[30px] flex-[8] text-[20px]'>Location</div>
                 </div>
-                <div className='flex items-center text-[18px] gap-2'>
-                    <label className='font-[600] flex-[1.1] text-right'>Where will your <span className='text-red-500'>*</span> event take place?</label>
+                <div className='flex md:flex-row flex-col md:items-center text-[18px] gap-2'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Where will your <span className='text-red-500'>*</span> event take place?</label>
                     <div className='flex-[8]'>
                         <select value={location} onChange={(e)=> setEventData({...eventData, location: e.target.value})}  className={'rounded-[6px] p-2 text-[#ACACAC] border-[1px] border-primary bg-transparent md:w-[675px]'}>
                             <option>Please select one</option>
@@ -197,20 +197,20 @@ function EventOne({setStep, step, event_title,
             </div>
 
 
-            <div className='w-full space-y-6'>
-                <div className='flex items-center gap-2'>
+            <div className='w-full space-y-6 md:mt-0 mt-5'>
+                <div className='flex md:flex-row flex-col md:items-center gap-2'>
                     <div className='flex-[1.1]'></div>
                     <div className='md:text-[30px] flex-[8] text-[20px]'>Additional Information</div>
                 </div>
-                <div className='flex text-[18px] gap-2'>
-                    <label className='font-[600] flex-[1.1] text-right'>Where will your <span className='text-red-500'>*</span> event take place?</label>
+                <div className='flex md:flex-row flex-col text-[18px] gap-2'>
+                    <label className='font-[600] flex-[1.1] md:text-right'>Where will your <span className='text-red-500'>*</span> event take place?</label>
                     <div className='flex-[8]'>
-                        <textarea value={event_description} onChange={(e)=> setEventData({...eventData, event_description: e.target.value})}  placeholder="Describe what's special about your event & other important details." className={'rounded-[6px] h-[300px] p-2 text-[#ACACAC] border-[1px] border-primary bg-transparent md:w-[675px]'}></textarea>
+                        <textarea value={event_description} onChange={(e)=> setEventData({...eventData, event_description: e.target.value})}  placeholder="Describe what's special about your event & other important details." className={'rounded-[6px] h-[300px] p-2 text-[#ACACAC] border-[1px] border-primary bg-transparent md:w-[675px] w-full'}></textarea>
                     </div>
                 </div>
             </div>
 
-            <div className='flex justify-end'>
+            <div className='flex justify-end md:mt-0 mt-4'>
                 <Button 
                     text={"Save & Continue"}
                     btnStyle={"bg-primary p-4 rounded-[8px] md:text-[18px] text-white md:w-[247.5px]"}
@@ -260,11 +260,11 @@ function EventTwo({
             <div className=''>
                 <div className='md:text-[30px] flex-[8] text-[20px]'>Upload Image</div>
                 <input type='file' onChange={handleFileChange} className='border-[1px] border-primary rounded-[8px] p-2 md:w-[675px]' />
-                <p className="md:w-[562px] md:text-[18px] text-[14px] font-[500] text-[#5A5A5A]">Feature Image must be at least 1170 pixels wide by 504 pixels high. Valid file formats: JPG, GIF, PNG.</p>
+                <p className="md:w-[562px] md:mt-0 mt-3 md:text-[18px] text-[14px] font-[500] text-[#5A5A5A]">Feature Image must be at least 1170 pixels wide by 504 pixels high. Valid file formats: JPG, GIF, PNG.</p>
             </div>
             
 
-            <div className='flex items-center justify-end'>
+            <div className='flex items-center justify-end md:mt-0 mt-3'>
                 <Button 
                     text={"Go back to Edit Event"}
                     btnStyle={"p-4 rounded-[8px] md:text-[18px] text-primary md:w-[247.5px]"}
@@ -313,7 +313,7 @@ function EventThree({
 
             <div className='flex flex-col text-[18px] gap-2 w-full'>
                 <label className='font-[500] md:text-[30px]'>What type of event are you running?</label>
-                <div className='flex items-center gap-8'>
+                <div className='flex md:flex-row flex-col md:items-center gap-8'>
                     <div onClick={()=> {
                         setRunningEvent(0)
                         setEventData({...eventData, running_event: "paid"})
@@ -333,9 +333,9 @@ function EventThree({
                 </div>
             </div>
 
-            <div className='flex flex-col text-[18px] gap-2 w-full'>
+            <div className='flex flex-col text-[18px] gap-2 w-full md;mt-0 mt-4'>
                 <label className='font-[500] md:text-[30px]'>What tickets are you selling?</label>
-                <div className='flex items-center gap-8'>
+                <div className='flex md:flex-row flex-col md:items-center gap-8'>
                     <div className='flex flex-col gap-1 w-full'>
                         <div className='text-primary font-[500] text-[16px]'>Ticket Name</div>
                         <input value={ticket_name} onChange={(e)=> setEventData({...eventData, ticket_name: e.target.value})}   type="text" className={'rounded-[6px] text-[#ACACAC] p-2 border-[1px] border-primary md:w-full'} placeholder='Ticket Name e.g. General Admission' />
@@ -348,7 +348,7 @@ function EventThree({
             </div>
             
 
-            <div className='flex items-center justify-end'>
+            <div className='flex items-center justify-end md:mt-0 mt-4'>
                 <Button 
                     text={"Go back"}
                     btnStyle={"p-4 rounded-[8px] md:text-[18px] text-primary md:w-[247.5px]"}

@@ -25,7 +25,7 @@ import { initScriptLoader } from 'next/script';
 
 
 const EventDetails = ({params}) => {
-    const {userData, ticketQuantity, setTicketQuantity, convertTo12HourFormat, buyTickethandler, handleTicketWalletPayment, isLoading, getUserData, isPaymentLoading} = useContext(AppContext);
+    const {userData, ticketQuantity, setTicketQuantity, convertTo12HourFormat, buyTickethandler, handleTicketWalletPayment, getWalletById, wallet, isWalletLoading, isLoading, getUserData, isPaymentLoading} = useContext(AppContext);
     const router = useRouter();
     const [event, setEvent] = useState({});
     // const [eventId, setEventId] = useState("")
@@ -45,7 +45,12 @@ const EventDetails = ({params}) => {
             fullName: userData?.fullName,
             email: userData?.email
         })
-    }, [])
+    }, []);
+
+
+    useEffect(()=>{
+        getWalletById();
+    }, []);
 
     const [ticketData, setTicketData] = useState({
         eventId: eventId,
@@ -209,7 +214,7 @@ const EventDetails = ({params}) => {
                 {ticketModal.ticketDetailsModal == true ? (
                     <>
                         {ticketModal.ticketSummaryModal == true ? (
-                            <Modal isOpen={ticketModal.ticketSummaryModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketSummaryModal: false}) }>
+                            <Modal isOpen={ticketModal.ticketSummaryModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketSummaryModal: false, ticketDetailsModal: false, selectTicketModal: false}) }>
                                 <div className='md:w-[842px] w-full bg-[#F1F3F6] absolute'>
                                     <div className='bg-white p-4 shadow-lg flex items-center gap-2'>
                                     <FaArrowLeft onClick={()=> setTicketModal({...ticketModal, ticketDetailsModal: true, ticketSummaryModal: false})} className='text-xl cursor-pointer' />
@@ -246,22 +251,26 @@ const EventDetails = ({params}) => {
                                                 <div className='inline-flex items-center justify-between'>Order Total: </div>
                                                 <div className='inline-flex items-center justify-between'><BiBitcoin className='text-[#F7931A] rotate-[30deg]' /> <span className='text-green-700'>{parseFloat(event?.ticket_price * ticketQuantity).toFixed(10)} BTC</span></div>
                                             </div>
-                                            <Button 
-                                                text={isPaymentLoading ? "wait a minute, Payment is Being Made..." : "Pay Now"}
-                                                iconName={<FaLock className='md:text-3xl text-white' />}
-                                                btnStyle={"text-white mt-4 font-[600] gap-4 md:text-[32px] text-[25px] w-full bg-[#287921] p-4"}
-                                                loading={isLoading}
-                                                onBtnClick={()=> {
-                                                    console.log(ticketData)
-                                                    handleTicketWalletPayment(ticketData.eventId, ticketData.fullName, ticketData.email, ticketQuantity, ticketData.phoneNumber, "paid")
-                                                }}
-                                            />
+                                            {isWalletLoading ? (
+                                                <Button text={"fetching Wallet data..."} btnStyle={'bg-gray-400 text-primary w-full m-auto p-4 md:text-[30px]'} />
+                                            ) : (
+                                                <Button 
+                                                    text={isPaymentLoading ? "wait a minute, Payment is Being Made..." : "Pay Now"}
+                                                    iconName={<FaLock className='md:text-3xl text-white' />}
+                                                    btnStyle={"text-white mt-4 font-[600] gap-4 md:text-[32px] text-[25px] w-full bg-[#287921] p-4"}
+                                                    loading={isLoading}
+                                                    onBtnClick={()=> {
+                                                        console.log(ticketData)
+                                                        handleTicketWalletPayment(ticketData.eventId, ticketData.fullName, ticketData.email, ticketQuantity, ticketData.phoneNumber, "paid", "BTC", "blockchain", wallet?.address,  parseFloat(event?.ticket_price * ticketQuantity).toFixed(10))
+                                                    }}
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                             </Modal>
                         ) : (
-                            <Modal isOpen={ticketModal.ticketDetailsModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketDetailsModal: false}) }>
+                            <Modal isOpen={ticketModal.ticketDetailsModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketDetailsModal: false, ticketSummaryModal: false, selectTicketModal: false}) }>
                                 <div className='md:w-[842px] w-full bg-[#F1F3F6] absolute'>
                                     <div className='bg-white p-4 shadow-lg flex items-center gap-2'>
                                         <FaArrowLeft onClick={()=> setTicketModal({...ticketModal, selectTicketModal: true, ticketDetailsModal: false})} className='text-xl cursor-pointer' />
