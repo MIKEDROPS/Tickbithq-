@@ -48,7 +48,7 @@ const Wallet = () => {
 
     useEffect(()=>{
         getWalletById();
-    }, [isNewWallet]);
+    }, [isLoading]);
 
     const handleWalletType = (val) =>{
         setWalletType(val)
