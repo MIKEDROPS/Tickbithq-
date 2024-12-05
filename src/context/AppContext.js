@@ -248,7 +248,6 @@ export const AppProvider = ({children})=>{
             const {data} = await userRequest.post(`/wallet/${userData?.wallets[0]}/transactions-btc`, {type, blockchain, toAddress, amount});
             if(data.success == true){
                 console.log(data.transacted);
-                setIsPaymentLoading(false)
                 toast(data.message);
                 buyTickethandler(
                     eventId,
@@ -257,11 +256,15 @@ export const AppProvider = ({children})=>{
                     quantity,
                     phoneNumber,
                     paymentStatus)
+                setIsPaymentLoading(false)
             }
+            // console.log(data.message.message);
+            // toast(data.message.message);
         } catch (error) {
             const err = error.response?.data;
             setIsPaymentLoading(false)
-            toast(err?.message)
+            console.log(error)
+            toast(err?.message.message)
         }
     }
 
@@ -278,17 +281,18 @@ export const AppProvider = ({children})=>{
             toast("Fields cannot be empty");
             return;
         }
-        setIsLoading(true)
+        // setIsLoading(true)
         try {
             const {data} = await authUserRequest.post(`/events/${eventId}/create-ticket`, {eventId, fullName, email, quantity, phoneNumber, userId: userData?._id, paymentStatus});
             if(data.success == true){
-                setIsLoading(false)
+                // setIsLoading(false)
                 toast(data?.message)
                 // handleTicketWalletPayment()
             }
         } catch (error) {
             const err = error.response?.data;
-            setIsLoading(false)
+            // setIsLoading(false)
+            console.log(error);
             toast(err?.message)
         }
     }

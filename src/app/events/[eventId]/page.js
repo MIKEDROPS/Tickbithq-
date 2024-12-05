@@ -35,23 +35,7 @@ const EventDetails = ({params}) => {
         selectTicketModal: false,
         ticketDetailsModal: false,
         ticketSummaryModal: false
-    })
-
-
-    useEffect(()=>{
-        getUserData();
-        setTicketData({
-            ...ticketData,
-            fullName: userData?.fullName,
-            email: userData?.email
-        })
-    }, []);
-
-
-    useEffect(()=>{
-        getWalletById();
-    }, [isWalletLoading]);
-
+    });
     const [ticketData, setTicketData] = useState({
         eventId: eventId,
         fullName: userData?.fullName,
@@ -60,6 +44,24 @@ const EventDetails = ({params}) => {
         userId: userData?._id,
         paymentStatus: "paid"
     });
+
+
+    useEffect(()=>{
+        getUserData();
+        setTicketData({
+            ...ticketData,
+            fullName: userData?.fullName,
+            email: userData?.email,
+            userId: userData?._id
+        })
+    }, [isWalletLoading]);
+
+
+    useEffect(()=>{
+        getWalletById();
+    }, [isLoading]);
+
+    
     // const {eventId} = params;
 
 
