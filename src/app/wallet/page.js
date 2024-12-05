@@ -43,7 +43,7 @@ const Wallet = () => {
 
     useEffect(()=>{
         getUserData();
-    }, [])
+    }, [isNewWallet])
 
 
     useEffect(()=>{
@@ -178,7 +178,7 @@ const Wallet = () => {
 
                 <Button 
                     text={"Create Wallet"}
-                    loading={isLoading}
+                    loading={isNewWallet}
                     onBtnClick={()=>{
                         if(walletType === "0"){
                             createNewWallet();

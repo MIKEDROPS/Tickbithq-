@@ -186,7 +186,7 @@ const EventDetails = ({params}) => {
 
             <div className='md:mt-8 mt-4'>
                 <div className='md:text-[30px] text-[20px] font-[700] text-primary'>Tags</div>
-                <div className='flex items-center gap-3 mt-3'>
+                <div className='flex items-center flex-wrap gap-3 mt-3'>
                     {["Holiday Concert","Live Performance","Seasonal Event","Family Friendly","#Christmas","#Christmas_Carols"].map((_, index)=>(
                         <Button
                             key={index}
@@ -214,16 +214,16 @@ const EventDetails = ({params}) => {
                 {ticketModal.ticketDetailsModal == true ? (
                     <>
                         {ticketModal.ticketSummaryModal == true ? (
-                            <Modal isOpen={ticketModal.ticketSummaryModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketSummaryModal: false, ticketDetailsModal: false, selectTicketModal: false}) }>
-                                <div className='md:w-[842px] w-full bg-[#F1F3F6] absolute'>
-                                    <div className='bg-white p-4 shadow-lg flex items-center gap-2'>
+                            <Modal isOpen={ticketModal.ticketSummaryModal} onCloseModal={()=> setTicketModal({...ticketModal, ticketSummaryModal: false, ticketDetailsModal: false, selectTicketModal: false}) }>
+                                <div className='md:w-[842px] w-full bg-[#F1F3F6] md:absolute'>
+                                    <div className='bg-white p-4 shadow-lg flex items-center gap-2 w-full'>
                                     <FaArrowLeft onClick={()=> setTicketModal({...ticketModal, ticketDetailsModal: true, ticketSummaryModal: false})} className='text-xl cursor-pointer' />
                                         <div className='text-primary font-[400] md:text-[32px] text-[25px]'>Order Summary</div>
                                     </div>
                                     <div className='mt-8'>
-                                        <div className="h-[250px] overflow-auto">
-                                            <div className='bg-white md:w-[603px] m-auto relative'>
-                                                <div className='m-auto md:w-[550px] border-t-[5px] border-[#4872C6]'>
+                                        <div className="h-[180px] w-full overflow-auto">
+                                            <div className='bg-white md:w-[603px] w-full m-auto relative'>
+                                                <div className='m-auto md:w-[550px] w-full border-t-[5px] border-[#4872C6]'>
                                                     <div className='md:text-[30px] text-[20px] font-[500] text-[#4872C6] text-center'>{event?.ticket_name} Ticket</div>
                                                     <div className='py-6'>
                                                         <div className='mt-2'>
@@ -237,7 +237,7 @@ const EventDetails = ({params}) => {
                                         </div>
 
                                         <div className='shadow-lg p-8 md:text-[25px] text-[15px] bg-white'>
-                                            <div className='flex flex-col items-center md:w-[497.78px] m-auto'>
+                                            <div className='flex flex-col items-center md:w-[497.78px] w-full m-auto'>
                                                 <div className='flex items-center justify-between w-full text-[#5A5A5A] md:text-[28px] text-[18px]'>
                                                     <div className=''>Sub Total:</div>
                                                     <div className=''>{parseFloat(event?.ticket_price * ticketQuantity).toFixed(10)}</div>
@@ -247,7 +247,7 @@ const EventDetails = ({params}) => {
                                                     <div className=''>{parseFloat(event?.ticket_price * 0.1).toFixed(10)}</div>
                                                 </div>
                                             </div>
-                                            <div className='flex justify-between items-center font-[600] border-t-[1px] pt-4 md:w-[497.78px] m-auto'>
+                                            <div className='flex justify-between items-center font-[600] border-t-[1px] pt-4 md:w-[497.78px] w-full m-auto'>
                                                 <div className='inline-flex items-center justify-between'>Order Total: </div>
                                                 <div className='inline-flex items-center justify-between'><BiBitcoin className='text-[#F7931A] rotate-[30deg]' /> <span className='text-green-700'>{parseFloat(event?.ticket_price * ticketQuantity).toFixed(10)} BTC</span></div>
                                             </div>
@@ -275,7 +275,7 @@ const EventDetails = ({params}) => {
                             </Modal>
                         ) : (
                             <Modal isOpen={ticketModal.ticketDetailsModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, ticketDetailsModal: false, ticketSummaryModal: false, selectTicketModal: false}) }>
-                                <div className='md:w-[842px] w-full bg-[#F1F3F6] absolute'>
+                                <div className='md:w-[842px] w-full bg-[#F1F3F6] md:absolute'>
                                     <div className='bg-white p-4 shadow-lg flex items-center gap-2'>
                                         <FaArrowLeft onClick={()=> setTicketModal({...ticketModal, selectTicketModal: true, ticketDetailsModal: false})} className='text-xl cursor-pointer' />
                                         <div className='text-primary font-[400] md:text-[32px] text-[25px]'>Attendee Details</div>
@@ -325,7 +325,7 @@ const EventDetails = ({params}) => {
                     </>
                 ) : (
                     <Modal isOpen={ticketModal.selectTicketModal} style={""} onCloseModal={()=> setTicketModal({...ticketModal, selectTicketModal: false}) }>
-                        <div className='md:w-[842px] w-full bg-[#F1F3F6] absolute'>
+                        <div className='md:w-[842px] w-full bg-[#F1F3F6] md:absolute'>
                             <div className='bg-white p-4 shadow-lg'>
                                 <div className='text-primary font-[400] md:text-[32px] text-[25px]'>Select Tickets</div>
                             </div>

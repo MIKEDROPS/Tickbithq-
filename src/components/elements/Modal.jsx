@@ -27,7 +27,7 @@ const Modal = ({ children, style, isOpen, onCloseModal }) => {
     <>
       {isOpen && (
         <div
-          className={`${style} w-full fixed left-0 top-0 z-30 h-[100vh] bg-black bg-opacity-[10%] backdrop-blur-md ${
+          className={`${style} w-full fixed left-0 top-0 z-30 h-[100vh] bottom-0 bg-black bg-opacity-[10%] backdrop-blur-md ${
             isOpen ? "grid" : "hidden"
           } place-items-center text-opacity-[100%]`}
         >
